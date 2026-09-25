@@ -5,4 +5,9 @@
 .DS_Store
 .idea/
 .vscode/
+
+# Local-only working docs: plans, ADRs, domain context, specs and tickets
 plan.md
+CONTEXT.md
+docs/adr/
+.scratch/
