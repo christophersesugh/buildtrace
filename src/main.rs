@@ -77,12 +77,12 @@ fn sort_report(report: &mut Report) {
 /// v0.0.1 skeleton: validates the manifest is readable and returns an empty
 /// report. Real package identities arrive with metadata support.
 fn inventory(manifest_path: &Path) -> Result<Report, InventoryError> {
-    if !manifest_path.is_file() {
-        return Err(InventoryError(format!(
-            "manifest not found: {}",
+    std::fs::read(manifest_path).map_err(|err| {
+        InventoryError(format!(
+            "cannot read manifest {}: {err}",
             manifest_path.display()
-        )));
-    }
+        ))
+    })?;
     let mut report = Report::default();
     sort_report(&mut report);
     Ok(report)
@@ -176,7 +176,7 @@ mod tests {
     #[test]
     fn inventory_rejects_missing_manifest() {
         let err = inventory(Path::new("does-not-exist-Cargo.toml")).expect_err("must fail");
-        assert!(err.to_string().contains("manifest not found"));
+        assert!(err.to_string().contains("cannot read manifest"));
     }
 
     #[test]
