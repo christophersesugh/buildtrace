@@ -49,8 +49,8 @@ Raw traces may contain sensitive local paths and command data. BuildTrace is des
 
 ## Contributing
 
-The project is not ready for external contributions yet. Please open an issue before proposing a substantial change, so its scope can be agreed against the product plan.
+The project is not ready for external contributions yet. Please open an issue before proposing a substantial change, so its scope can be agreed against the product plan. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-A license has not yet been selected. Do not assume permission to reuse or distribute the code until one is added.
+Licensed under either of [MIT](LICENSE-MIT) or [Apache-2.0](LICENSE-APACHE), at your option.
