@@ -1,0 +1,14 @@
+[package]
+name = "buildtrace-cli"
+version = "0.0.1"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+
+[[bin]]
+name = "cargo-buildtrace"
+path = "src/main.rs"
+
+[dependencies]
+buildtrace-cargo = { path = "../buildtrace-cargo" }
+buildtrace-core = { path = "../buildtrace-core" }
+clap = { version = "4.6.7", features = ["derive"] }

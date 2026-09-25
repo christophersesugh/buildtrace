@@ -53,10 +53,25 @@ dependencies = [
 ]
 
 [[package]]
-name = "buildtrace"
+name = "buildtrace-cargo"
 version = "0.0.1"
 dependencies = [
+ "buildtrace-core",
+]
+
+[[package]]
+name = "buildtrace-cli"
+version = "0.0.1"
+dependencies = [
+ "buildtrace-cargo",
+ "buildtrace-core",
  "clap",
+]
+
+[[package]]
+name = "buildtrace-core"
+version = "0.0.1"
+dependencies = [
  "serde",
  "serde_json",
 ]
