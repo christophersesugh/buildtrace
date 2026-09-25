@@ -41,7 +41,7 @@ cargo test
 cargo run
 ```
 
-Read [plan.md](plan.md) for the architecture, threat model, milestones, data-format direction, and test strategy. Repository conventions for people and agents are in [AGENTS.md](AGENTS.md).
+Repository conventions for people and agents are in [AGENTS.md](AGENTS.md).
 
 ## Security and privacy
 
