@@ -3,14 +3,14 @@
 These are enforced by `rustfmt` and Clippy — do not fight them:
 
 - **Formatting**: `cargo fmt` defaults (4 spaces, 100-column soft width).
-  Run `cargo fmt --check` before committing.
-- **Lints**: `cargo clippy --all-targets -- -D warnings` must be clean. Fix
+  Run `cargo fmt --all --check` before committing.
+- **Lints**: `cargo clippy --workspace --all-targets -- -D warnings` must be clean. Fix
   lints — do not suppress them without a strong, documented reason.
 - **File length**: keep source files cohesive and modular (target `<= 500
   LOC` per file); extract helpers or modules when approaching the limit.
-- **Module boundaries**: keep them tidy — the single crate splits into
-  `crates/` when `record` lands, so code that will move together should
-  already live together.
+- **Crate boundaries**: keep them aligned with `plan.md` — CLI output in
+  `buildtrace-cli`, report model in `buildtrace-core`, manifest reading in
+  `buildtrace-cargo`. Code that will move together should already live together.
 - **No dead code**: remove it or gate it behind the ticket that needs it.
   No commented-out code blocks and no leftover debug output.
 

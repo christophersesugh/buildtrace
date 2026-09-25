@@ -15,9 +15,9 @@ This is a single-context repository using `CONTEXT.md` and `docs/adr/`. See `doc
 BuildTrace is a Linux-first Cargo build capability recorder and policy-diff tool.
 
 - **Facts over assumptions**: inspect source code and verify contracts directly. Do not rely on unverified assumptions.
-- **Layout**: single `buildtrace` crate now; split into `crates/` when `record` lands. Keep module boundaries tidy so the split stays mechanical.
-- **Gates**: `cargo fmt --check`, `cargo clippy -- -D warnings`, `cargo test` must pass before a task counts as done.
-- **Local-only files**: `plan.md`, `CONTEXT.md`, `docs/adr/`, `docs/agents/`, and `.scratch/` stay untracked. Never commit them.
+- **Layout**: Cargo workspace with `crates/` from day one per `plan.md` (`buildtrace-cli`, `buildtrace-core`, `buildtrace-cargo` now; `buildtrace-linux`, `buildtrace-policy` arrive with `record`/`propose`). Keep crate boundaries tidy.
+- **Gates**: `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace` must pass before a task counts as done.
+- **Local-only files**: Never commit them gitignored files.
 - **Clean git hygiene**: never commit secrets, API keys, `.env` files, or gitignored build output.
 
 ## Workspace Rules
