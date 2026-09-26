@@ -179,17 +179,12 @@ mod tests {
     #[test]
     fn build_script_fixture_lists_build_script_with_identity() {
         let report = inventory(&fixture("has-build-script")).expect("fixture reads");
-        assert_eq!(report.packages.len(), 1);
-        let entry = &report.packages[0];
-        assert_eq!(entry.name, "fixture-build-script");
-        assert_eq!(entry.version, "0.1.0");
-        assert!(
-            entry.source.starts_with("path+"),
-            "source: {}",
-            entry.source
+        assert_single_entry(
+            &report,
+            "fixture-build-script",
+            "has-build-script",
+            ExecutableKind::BuildScript,
         );
-        assert_eq!(entry.checksum, None);
-        assert_eq!(entry.kind, ExecutableKind::BuildScript);
     }
 
     #[test]
@@ -205,22 +200,35 @@ mod tests {
     #[test]
     fn proc_macro_fixture_lists_proc_macro_with_identity() {
         let report = inventory(&fixture("has-proc-macro")).expect("fixture reads");
-        assert_eq!(report.packages.len(), 1);
-        let entry = &report.packages[0];
-        assert_eq!(entry.name, "fixture-proc-macro");
-        assert_eq!(entry.version, "0.1.0");
-        assert!(
-            entry.source.starts_with("path+"),
-            "source: {}",
-            entry.source
+        assert_single_entry(
+            &report,
+            "fixture-proc-macro",
+            "has-proc-macro",
+            ExecutableKind::ProcMacro,
         );
-        assert_eq!(entry.checksum, None);
-        assert_eq!(entry.kind, ExecutableKind::ProcMacro);
     }
 
     #[test]
     fn neither_fixture_reports_empty() {
         let report = inventory(&fixture("has-neither")).expect("fixture reads");
         assert!(report.packages.is_empty());
+    }
+
+    /// Path-only fixtures carry no lockfile checksum, so exactness here is
+    /// name, version, the fixture directory inside the source URL, and kind.
+    /// Registry/Git checksums resolve through `checksum_for` against real
+    /// lockfiles, which v0.0.1 cannot fixture without network (spec).
+    fn assert_single_entry(report: &Report, name: &str, fixture_dir: &str, kind: ExecutableKind) {
+        assert_eq!(report.packages.len(), 1);
+        let entry = &report.packages[0];
+        assert_eq!(entry.name, name);
+        assert_eq!(entry.version, "0.1.0");
+        assert!(
+            entry.source.starts_with("path+") && entry.source.contains(fixture_dir),
+            "source: {}",
+            entry.source
+        );
+        assert_eq!(entry.checksum, None);
+        assert_eq!(entry.kind, kind);
     }
 }
