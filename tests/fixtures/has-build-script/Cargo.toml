@@ -1,0 +1,9 @@
+[package]
+name = "fixture-build-script"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+fixture-plain = { path = "fixture-plain" }
+
+[workspace]

@@ -6,3 +6,5 @@ license = "MIT OR Apache-2.0"
 
 [dependencies]
 buildtrace-core = { path = "../buildtrace-core" }
+cargo-lock = "11.1.0"
+cargo_metadata = "0.23.1"
